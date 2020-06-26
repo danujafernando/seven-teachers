@@ -1,0 +1,288 @@
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: "Open Sans",sans-serif;
+}
+.login{
+    background-color: #364150!important;
+}
+.login .logo-content{
+    width: 400px;
+    margin: 40px auto 0px;
+    padding: 0px 0px 0px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+.login .content{
+    background-color: #fff;
+    width: 400px;
+    margin: 20px auto 10px;
+    padding: 10px 30px 30px;
+    overflow: hidden;
+    position: relative;
+}
+
+.login .content .form-control {
+    background-color: #dde3ec;
+    height: 43px;
+    color: #8290a3;
+    border: 1px solid #dde3ec;
+    border-radius: 0px !important;
+}
+
+.uppercase {
+    text-transform: uppercase!important;
+}
+.login .content .form-title{
+    color: #32c5d2;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 400!important;
+}
+
+.login .content .form-actions .btn {
+    margin-top: 1px;
+    font-weight: 600;
+    padding: 10px 20px!important;
+    border-radius: 0px !important;
+}
+.default-btn, .default-btn:hover{
+    color: #FFF;
+    background-color: #32c5d2;
+    border-color: #32c5d2;
+}
+.login .content .form-control.is-invalid{
+    border: 2px solid #fd071e !important;
+}
+@media (max-width:440px){
+    .login .content{
+        width:280px
+    }
+    .login .logo-content{
+        width:280px
+    }
+}
+
+.login .content .form-actions {
+    clear: both;
+    border: 0;
+    padding: 25px 30px;
+    margin-left: -30px;
+    margin-right: -30px;
+}
+
+.login .content .rememberme {
+    margin-left: 8px;
+}
+
+.login .content .check {
+    color: #8290a3;
+}
+label {
+    font-weight: 400;
+}
+input[type=checkbox], input[type=radio] {
+    margin: 4px 0 0;
+}
+.check-box {
+     display: inline-block;
+     position: relative;
+     padding-left: 30px;
+     margin-bottom: 15px;
+     cursor: pointer;
+     font-size: 14px;
+     webkit-transition: all .3s;
+     -moz-transition: all .3s;
+     -ms-transition: all .3s;
+     -o-transition: all .3s;
+     transition: all .3s;
+ }
+
+.check-box  input{
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.checkmark{
+    border: 1px solid transparent;
+    position: absolute;
+    top: 1px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background: #E6E6E6;
+}
+
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.checkmark, .checkmark:after {
+    border: 1px solid #d9d9d9;
+    background: 0 0;
+}
+.check-box input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.check-box span:after{
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid #888;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.alert-danger {
+    background-color: #fbe1e3;
+    border-color: #fbe1e3;
+    color: #e73d4a !important;
+}
+
+.has-error .checkbox, .has-error .checkbox-inline, .has-error.checkbox-inline label, .has-error.checkbox label, .has-error .control-label, .has-error .help-block, .has-error .radio, .has-error .radio-inline, .has-error.radio-inline label, .has-error.radio label {
+    color: #f00d08 !important;
+}
+
+.page-header-fixed .page-container {
+     margin-top: 0px !important;
+}
+
+@media (min-width: 992px) {
+    .page-header-fixed .page-container {
+        margin-top: 50px !important;
+    }
+}
+.custom-select.is-invalid, .form-control.is-invalid, .was-validated .custom-select:invalid, .was-validated .form-control:invalid {
+    border-color: #fd071e;
+}
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #fd071e;
+}
+
+.swing-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: transparent;
+    z-index: 999999;
+}
+
+.swing-preloader .in-preload {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sk-rotating-plane {
+    width: 40px;
+    height: 40px;
+    background-color: #755cd7;
+    margin: 40px auto;
+    -webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
+    animation: sk-rotatePlane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-rotatePlane {
+    0% {
+        background-color: #5cb5d7;
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+    50% {
+        background-color: #5cd7aa;
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+    100% {
+        background-color: #bed75c;
+        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); } }
+
+@keyframes sk-rotatePlane {
+    0% {
+        background-color: #bed75c;
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
+    50% {
+        background-color: #5cd7aa;
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg); }
+    100% {
+        background-color: #5cb5d7;
+        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg); } }
+
+
+
+.page-header.navbar .page-logo .logo-default {
+    width: 144px !important;
+    margin: 8px 0 0 !important;
+}
+
+
+#min_rate_section{
+    padding-left: 0 !important;
+}
+
+#max_rate_section{
+    padding-right: 0 !important;
+}
+@media (max-width: 992px) {
+    #min_rate_section{
+        padding-right: 0 !important;
+    }
+
+    #max_rate_section{
+        padding-left: 0 !important;
+    }
+}
+
+#job_description ul li{
+    list-style-type: square !important;
+}
+
+.job-type{
+    margin-left: 2px;
+    border: 1px solid;
+    border-radius: 3px !important;
+    padding: 1px 4px;
+}
+.internship{
+    color: #dcaa0c;
+    border-color: #dfb634;
+    background-color: #fdfcf2;
+}
+
+.freelance{
+    color: #53b427;
+    border-color: #53b427;
+    background-color: #f5fbf2;
+}
+
+.full-time{
+    color: #186fc9;
+    border-color: #186fc9;
+    background-color: #f1f7fc;
+}
+
+.part-time{
+    color: #f1630d;
+    border-color: #f1630d;
+    background-color: #fef6f0;
+}
+
+.applied-status{
+    background-color: #00ff431a !important;
+}
+.applied-status td:hover {
+    background-color: #00ff1f7a !important;
+}

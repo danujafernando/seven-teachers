@@ -1,0 +1,217 @@
+.search-container2 {
+    display: block;
+    width: 100%;
+    position: relative;
+    padding: 10px 0 10px 0;
+    margin-top: -20px;
+}
+.search-container2 input,.search-container2 button{
+    border-radius: 3px;
+}
+.search-container2 input{
+    font-weight: 500;
+    font-size: 16px;
+    min-height: 60px;
+    float: left;
+    box-sizing: border-box;
+    padding: 19px 20px;
+    border: none;
+    margin-right: 2%;
+    width: 44.5%;
+    float: left;
+}
+
+.search-container2 input.ico-01 {
+    background: #f0efef;
+}
+
+.search-container2 button{
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    height: 60px;
+    width: 7%;
+    position: relative;
+}
+.auto-search{
+    z-index: 1000;
+    position: relative;
+    max-height: 150px;
+    width:44.5%;
+    top: -10px;
+    border-radius: 3px;
+    background: #f7f7f7;
+}
+
+.auto-search ul li{
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+
+.auto-search ul li:hover{
+    background-color: #26ae61;
+}
+
+.auto-search-keyword, .auto-search-location, .auto-search-keyword2, .auto-search-location2{
+    z-index: 1000;
+    position: relative;
+    max-height: 150px;
+    float: left;
+    width:44.5%;
+    background: #f7f7f7;
+    border-radius: 3px;
+    margin-right: 2%;
+    cursor: pointer;
+    overflow-y: scroll;
+}
+.auto-search-location, .auto-search-location2{
+    margin-left: 46.5%;
+}
+.auto-search-keyword ul li, .auto-search-location ul li,.auto-search-keyword2 ul li, .auto-search-location2 ul li{
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+
+.auto-search-keyword ul li:hover, .auto-search-location ul li:hover, .auto-search-keyword2 ul li:hover, .auto-search-location2 ul li:hover{
+    background-color: #26ae61;
+    color: #ffffff;
+}
+
+.browse-jobs {
+    float: left;
+    width: 100%;
+}
+@media only screen and (max-width: 767px){
+    .search-container2 input.ico-01 {
+        width: 100%;
+        margin: 0 0 15px 0;
+    }
+    .search-container2 button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .auto-search{
+        top: -154px;
+        width:100%;
+    }
+    .auto-search-keyword{
+        top: -150px;
+        width: 100%;
+    }
+    .auto-search-location{
+        margin-left: 0;
+        top: -76px;
+        width: 100%;
+    }
+    .auto-search-keyword2{
+        top: -155px;
+        width: 100%;
+    }
+    .auto-search-location2{
+        top: -80px;
+        width: 100%;
+    }
+}
+
+
+.no-search-values{
+    padding: 23px;
+    font-size: 20px;
+}
+
+.no-search-jobs-list{
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 16px;
+}
+
+.company-description ul{
+    list-style: none !important;
+
+}
+.company-description ul li::before {
+    content: '■';
+    font-family: "FontAwesome";
+    margin: 0 0 0 0;
+    position: relative;
+    float: left;
+    margin-left: -20px;
+    display: block;
+    color: #26ae61 !important;
+    font-size: 16px;
+}
+.company-description ul li{
+    margin: 9px 0 !important;
+    margin-left: 20px !important;
+    font-family: Montserrat, HelveticaNeue, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#666666;
+}
+
+#apply-this-job input.error, #apply-this-job textarea.error, #apply-this-job select.error {
+    border: 1px solid #f6d5d3;
+    background: #ffeceb;
+}
+
+.email_error,
+.name_error,
+.location_error,
+.cv_error,
+.cv_cover_letter,
+.phone_error{
+    color: #fa0d00;
+}
+
+#small-dialog-success p.lead{
+   text-align: center;
+}
+
+#location-list{
+    z-index: 100;
+    top: 45px;
+    display: block;
+    width: 96%;
+    margin-top: -18px;
+    margin-bottom: 10px;
+    background-color: #fcfcfc;
+    cursor: pointer;
+    border-bottom: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    border-radius: 3px;
+    padding: 0 4px 0 8px;
+}
+#location-list li {
+    padding: 10px 10px;
+    line-height: 15px !important;
+    word-wrap: break-word;
+    border-radius: 3px;
+
+}
+#location-list li:hover{
+    background-color:#26ae61;
+    color: #fcfcfc;
+}
+
+.centered-headline-testimonial{
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0 15px 0;
+    padding: 40px 0;
+    display: block;
+    background-color: #f6f6f6;
+}
+
+h3.centered-headline-testimonial span {
+    display: block;
+    font-size: 20px;
+    color: #888;
+    font-weight: 500;
+    position: relative;
+    margin-top: -10px;
+}
+
