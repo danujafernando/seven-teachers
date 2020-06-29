@@ -161,10 +161,10 @@ class StudentController extends Controller
             if($i != 0){
                 try{
                     if($row[0]){
-                        $name_row = explode('-', $row[0]);
+                        $name = $row[0];
                         $password = SMSMessage::generate_string(6);
                         $student = new Student();
-                        $student->name = $name_row[0];
+                        $student->name = $name;
                         $student->full_name = $row[1];
                         $student->address = $row[2];
                         $student->email = $row[3];
@@ -183,7 +183,7 @@ class StudentController extends Controller
                         $student->save();
                         $message = "Welcome to SevenTeachers \n\n";
                         $message .= "Click for your Dashboard: ".route('login')."\n\n";
-                        $message .= "Username: ".$row[0]."\n";
+                        $message .= "Username: ".$name."\n";
                         $message .= "Password: ".$password."\n";
                         $sms = new SMSMessage();
                         $sms->number = $row[4];
