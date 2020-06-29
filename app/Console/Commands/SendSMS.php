@@ -49,39 +49,48 @@ class SendSMS extends Command
     {
         //
         $sms_messages = SMSMessage::where('status', 0)->get();
+        $sms_pluck = $sms_messages->pluck('id')->toArray();
+        SMSMessage::whereIn('id', $sms_pluck)->update([ 'status' => 1 ]);
         foreach($sms_messages as $message){
-            $params = array(
-                'username' => $this->username,
-                'password' => $this->password,
-                'src' => $this->src,
-                'dst' => $message->number,
-                'msg' => $message->message,
-                'dr' => $this->dr
-            );
-            
-            $param = "";
-            foreach($params as $key => $value){
-                $param .= $key."=".urlencode($value)."&";
+            try{
+                $params = array(
+                    'username' => $this->username,
+                    'password' => $this->password,
+                    'src' => $this->src,
+                    'dst' => $message->number,
+                    'msg' => $message->message,
+                    'dr' => $this->dr
+                );
+                
+                $param = "";
+                foreach($params as $key => $value){
+                    $param .= $key."=".urlencode($value)."&";
+                }
+                $param = substr($param, 0, strlen($param)-1);
+                $length =strlen($param);
+                $headers = array(
+                    "Content-type" => "application/x-www-form-urlencoded",
+                    "Content-length" => $length
+                );
+                
+                $url = "http://sms.textware.lk:5000/sms/send_sms.php?".$param;
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $response = curl_exec($ch);
+                curl_close($ch);
+                SMSMessage::where('id', $message->id)
+                            ->update([
+                                'status' => 2,
+                                'develery_status' => $response
+                            ]);
+            }catch(\Exception $e){
+                SMSMessage::where('id', $message->id)
+                            ->update([
+                                'develery_status' => $e->getMessage(),
+                            ]);
             }
-            $param = substr($param, 0, strlen($param)-1);
-            $length =strlen($param);
-            $headers = array(
-                "Content-type" => "application/x-www-form-urlencoded",
-                "Content-length" => $length
-            );
-            
-            $url = "http://sms.textware.lk:5000/sms/send_sms.php?".$param;
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $response = curl_exec($ch);
-            curl_close($ch);
-            SMSMessage::where('id', $message->id)
-                        ->update([
-                            'status' => 1,
-                            'develery_status' => $response
-                        ]);
         }
     }
 }
