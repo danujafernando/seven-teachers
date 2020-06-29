@@ -51,14 +51,19 @@
                                         <span class="fileinput-exists"> Change </span>
                                         <input type="file" name="class_image_1">
                                     </span>
-                                    <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                                    @if($status)
+                                        <a href="{{ route('banner.remove.post', [$banner->id, 1]) }}"  class="btn default" 
+                                            onclick="event.preventDefault(); document.getElementById('banner-remove-{{ $banner->id }}-1').submit();"> Remove </a>
+                                    @else
+                                        <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a> 
+                                    @endif
                                 </div>
                             </div>
                             <?php $image = "http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"; 
                                 $file_class = "fileinput-new";
                                 $status = 0;
                                 if($banner){
-                                    if($banner->image_2_url){
+                                    if(file_exists($banner->image_2_url)){
                                         $image = asset($banner->image_2_url);
                                         $file_class = "fileinput-exists";
                                         $status = 1;
@@ -81,14 +86,19 @@
                                         <span class="fileinput-exists"> Change </span>
                                         <input type="file" name="class_image_2">
                                     </span>
-                                    <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                                    @if($status)
+                                        <a href="{{ route('banner.remove.post', [$banner->id, 2]) }}"  class="btn default" 
+                                            onclick="event.preventDefault(); document.getElementById('banner-remove-{{ $banner->id }}-2').submit();"> Remove </a>
+                                    @else
+                                        <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a> 
+                                    @endif
                                 </div>
                             </div>
                             <?php $image = "http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"; 
                                 $file_class = "fileinput-new";
                                 $status = 0;
                                 if($banner){
-                                    if($banner->image_3_url){
+                                    if(file_exists($banner->image_3_url)){
                                         $image = asset($banner->image_3_url);
                                         $file_class = "fileinput-exists";
                                         $status = 1;
@@ -111,7 +121,12 @@
                                         <span class="fileinput-exists"> Change </span>
                                         <input type="file" name="class_image_3">
                                     </span>
-                                    <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                                    @if($status)
+                                        <a href="{{ route('banner.remove.post', [$banner->id, 3]) }}"  class="btn default" 
+                                            onclick="event.preventDefault(); document.getElementById('banner-remove-{{ $banner->id }}-3').submit();"> Remove </a>
+                                    @else
+                                        <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a> 
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -120,6 +135,23 @@
                         <button type="submit" class="btn blue">Submit</button>
                     </div>
                     </form>
+                    @if($banner)
+                        @if(file_exists($banner->image_1_url))
+                            <form id="banner-remove-{{ $banner->id }}-1" action="{{ route('banner.remove.post', [$banner->id, 1]) }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @endif
+                        @if(file_exists($banner->image_2_url))
+                            <form id="banner-remove-{{ $banner->id }}-2" action="{{ route('banner.remove.post', [$banner->id, 2]) }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @endif
+                        @if(file_exists($banner->image_3_url))
+                            <form id="banner-remove-{{ $banner->id }}-3" action="{{ route('banner.remove.post', [$banner->id, 3]) }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @endif
+                    @endif
                 </div>
             </div>
         </div>

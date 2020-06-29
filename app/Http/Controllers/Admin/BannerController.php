@@ -109,4 +109,32 @@ class BannerController extends Controller
         session()->flash('success_message','Banner images have been updated successfully');
         return redirect()->to(route('banner.get', [ $grade ]));
     }
+
+    public function remove($id, $slot){
+        $banner = Banner::find($id);
+        if(!$banner){
+            session()->flash('error_message','This banner doesn\'t exists');
+        }
+        if($slot == 1){
+            if(file_exists($banner->image_1_url)){
+                unlink($banner->image_1_url);
+            }
+            $banner->image_1_url = null;
+        }
+        if($slot == 2){
+            if(file_exists($banner->image_2_url)){
+                unlink($banner->image_2_url);
+            }
+            $banner->image_2_url = null;
+        }
+        if($slot == 3){
+            if(file_exists($banner->image_3_url)){
+                unlink($banner->image_3_url);
+            }
+            $banner->image_3_url = null;
+        }
+        $banner->save();
+        session()->flash('success_message','Banner image have been removed successfully');
+        return redirect()->back();
+    }
 }

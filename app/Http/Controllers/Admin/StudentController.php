@@ -105,11 +105,11 @@ class StudentController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
+        $password = $request->get('password');
         $student = new Student();
         $student->name = $request->get('name');
         $student->email = $request->get('email');
-        $student->password = Hash::make($request->get('password'));
+        $student->password = Hash::make($password);
         $student->full_name = $request->get('full_name');
         $student->contact_no = $request->get('contact_no');
         $student->address = $request->get('address');
@@ -117,6 +117,14 @@ class StudentController extends Controller
         $student->grade = $request->get('grade');
         $student->medium = $request->get('medium');
         $student->save();
+        $message = "Welcome to SevenTeachers \n\n";
+        $message .= "Click for your Dashboard: ".route('login')."\n\n";
+        $message .= "Username: ".$student->name."\n";
+        $message .= "Password: ".$password."\n";
+        $sms = new SMSMessage();
+        $sms->number = $student->contact_no;
+        $sms->message = $message;
+        $sms->save();
         session()->flash('success_message','Student has been created successfully');
         return redirect()->back();
     }

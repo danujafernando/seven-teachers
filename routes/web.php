@@ -71,6 +71,7 @@ Route::group(['prefix'=>'administrator'], function() {
 
     Route::get('banners/{grade?}','Admin\BannerController@show')->name('banner.get');
     Route::post('banners','Admin\BannerController@upload')->name('banner.post');
+    Route::post('banner/remove/{id}/{slot}','Admin\BannerController@remove')->name('banner.remove.post');
 });
 
 Route::get('/', function () {
