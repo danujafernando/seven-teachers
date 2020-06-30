@@ -180,14 +180,14 @@
                                                                             <button class="btn btn-danger vc-danger-btn btn-width">Session Closed</button>
                                                                             <button class="btn btn-warning vc-warning-btn btn-width">Ready For Class</button>
                                                                             <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
-                                                                            <a href="{{ $virtual_class_session->virtual_class_url }}" class="btn btn-success vc-success-btn btn-width" style="color: white;">Go To Class</a>
+                                                                            <a href="{{ $virtual_class_session->virtual_class_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Go To Class</a>
                                                                         </div>
                                                                     </td>
                                                                     <td>
                                                                         <div id="{{ "tute-".$loop->parent->iteration."-".$loop->iteration }}" data-id="{{ "tute-".$loop->parent->iteration."-".$loop->iteration }}" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
                                                                             
                                                                             @if($virtual_class_session->tute_url)
-                                                                                <a href="{{ $virtual_class_session->tute_url }}" class="btn btn-success vc-success-btn btn-width" style="color: white;">Download tute</a>
+                                                                                <a href="{{ $virtual_class_session->tute_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Download tute</a>
                                                                             @else 
                                                                                 <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
                                                                             @endif
@@ -201,11 +201,11 @@
                                                                     <tr>
                                                                         <td>Extra Class</td>
                                                                         <td>
-                                                                            <a href="{{ $extra_virtual_class_session->virtual_class_url }}" class="btn btn-success vc-success-btn btn-width" style="color: white;">Go To Class</a>
+                                                                            <a href="{{ $extra_virtual_class_session->virtual_class_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Go To Class</a>
                                                                         </td>
                                                                         <td>
                                                                             @if($extra_virtual_class_session->tute_url)
-                                                                                <a href="{{ $extra_virtual_class_session->tute_url }}" class="btn btn-success vc-success-btn btn-width" style="color: white;">Download tute</a>
+                                                                                <a href="{{ $extra_virtual_class_session->tute_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Download tute</a>
                                                                             @else 
                                                                                 <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
                                                                             @endif
