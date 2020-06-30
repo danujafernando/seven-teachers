@@ -63,7 +63,7 @@ class StudentController extends Controller
         $rules = [
             'email' => 'required|email|unique:users,email',
             'name' => 'required|string|max:255|unique:users,name',
-            'password' => 'required|string|max:255|min:8',
+            'password' => 'required|string|max:255|min:6',
             'full_name' => 'string|max:255',
             'contact_no' => 'string|max:10',
             'address' => 'string|max:255',
@@ -83,7 +83,7 @@ class StudentController extends Controller
             'password.required' =>'The password field is required',
             'password.string' => 'The password should be string',
             'password.max' => 'Maximum characters is 255',
-            'password.min' => 'Minimum characters is 8',
+            'password.min' => 'Minimum characters is 6',
             'full_name.string' => 'The full_name should be string',
             'full_name.max' => 'Maximum characters is 255',
             'contact_no.string' => 'The contact_no should be string',
