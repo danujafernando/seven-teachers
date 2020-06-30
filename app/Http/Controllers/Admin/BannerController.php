@@ -73,7 +73,7 @@ class BannerController extends Controller
                 }
             }
             $ext = $class_image_1->getClientOriginalExtension();
-            $fileName = "banner_image_".$t.'.'.$ext;
+            $fileName = "banner_image_1_".$t.'.'.$ext;
             $location = public_path('images/banner_images/');
             $class_image_1->move($location, $fileName);
             $image_1_path = 'images/banner_images/'.$fileName;
@@ -86,7 +86,7 @@ class BannerController extends Controller
                 }
             }
             $ext = $class_image_2->getClientOriginalExtension();
-            $fileName = "banner_image_".$t.'.'.$ext;
+            $fileName = "banner_image_2_".$t.'.'.$ext;
             $location = public_path('images/banner_images/');
             $class_image_2->move($location, $fileName);
             $image_2_path = 'images/banner_images/'.$fileName;
@@ -99,7 +99,7 @@ class BannerController extends Controller
                 }
             }
             $ext = $class_image_3->getClientOriginalExtension();
-            $fileName = "banner_image_".$t.'.'.$ext;
+            $fileName = "banner_image_3_".$t.'.'.$ext;
             $location = public_path('images/banner_images/');
             $class_image_3->move($location, $fileName);
             $image_3_path = 'images/banner_images/'.$fileName;

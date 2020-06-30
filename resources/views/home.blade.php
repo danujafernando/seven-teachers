@@ -54,7 +54,7 @@
                                         <div class="col-md-3 col-sm-6 col-xs-6">Full name</div>
                                         <div class="col-md-6 col-sm-6 col-xs-6">
                                             <div class="form-group">
-                                                <input type="text" value="{{ $student->full_name }}" name="full_name" id="full_name" class="form-control {{ $errors->has('full_name') ? ' is-invalid' : '' }} input-icon" placeholder="Full name">
+                                                <input type="text" readonly value="{{ $student->full_name }}" name="full_name" id="full_name" class="form-control {{ $errors->has('full_name') ? ' is-invalid' : '' }} input-icon" placeholder="Full name">
                                             </div>
                                         </div>
                                     </div>
@@ -62,7 +62,7 @@
                                         <div class="col-md-3 col-sm-6 col-xs-6">Address</div>
                                         <div class="col-md-6 col-sm-6 col-xs-6">
                                             <div class="form-group">
-                                                <input type="text" value="{{ $student->address }}" name="address" id="address" class="form-control {{ $errors->has('address') ? ' is-invalid' : '' }} input-icon" placeholder="Address">
+                                                <input type="text" readonly value="{{ $student->address }}" name="address" id="address" class="form-control {{ $errors->has('address') ? ' is-invalid' : '' }} input-icon" placeholder="Address">
                                             </div>
                                         </div>
                                     </div>
@@ -70,7 +70,7 @@
                                         <div class="col-md-3 col-sm-6 col-xs-6">School</div>
                                         <div class="col-md-6 col-sm-6 col-xs-6">
                                             <div class="form-group">
-                                                <input type="text" value="{{ $student->school }}" name="school" id="school" class="form-control {{ $errors->has('school') ? ' is-invalid' : '' }} input-icon" placeholder="School">
+                                                <input type="text" readonly value="{{ $student->school }}" name="school" id="school" class="form-control {{ $errors->has('school') ? ' is-invalid' : '' }} input-icon" placeholder="School">
                                             </div>
                                         </div>
                                     </div>
@@ -78,7 +78,7 @@
                                         <div class="col-md-3 col-sm-6 col-xs-6">Grade</div>
                                         <div class="col-md-6 col-sm-6 col-xs-6">
                                             <div class="form-group">
-                                                <select name="grade" id="grade" class="form-control">
+                                                <select name="grade" readonly id="grade" class="form-control">
                                                     <option value="6" @if($student->grade == 6) selected @endif> Grade 6</option>
                                                     <option value="7" @if($student->grade == 7) selected @endif> Grade 7</option>
                                                     <option value="8" @if($student->grade == 8) selected @endif> Grade 8</option>
@@ -92,9 +92,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if(false)
                                 <div class="form-actions">
                                     <button type="submit" class="btn btn-primary primary-color">Submit</button>
                                 </div>
+                                @endif
                             </form>
                         </div>
                         <div id="updates" class="tab-pane fade" role="tabpanel">
@@ -134,11 +136,29 @@
                                                 <div class="row" style="margin-top: 15px;">
                                                     <div class="col-md-12" style="margin-top: 5px; margin-bottom: 15px;">
                                                         <strong>Teacher:</strong> {{ $virtual_class->teacher_name }}<br>
+                                                        <strong>Day :</strong>
+                                                            @if($virtual_class->day == 1)
+                                                                Monday
+                                                            @elseif($virtual_class->day == 2)
+                                                                Tuesday
+                                                            @elseif($virtual_class->day == 3)
+                                                                Wednesday
+                                                            @elseif($virtual_class->day == 4)
+                                                                Thursday
+                                                            @elseif($virtual_class->day == 5)
+                                                                Friday
+                                                            @elseif($virtual_class->day == 6)
+                                                                Saturday
+                                                            @elseif($virtual_class->day == 7)
+                                                                Sunday
+                                                            @endif
+                                                        <br>
                                                         <strong>Time:</strong> {{ $virtual_class->start_at_2 }} - {{ $virtual_class->end_at_2 }}
+                                                        
                                                     </div>
                                                     <div class="col-md-12" style="margin-top: 5px; margin-bottom: 5px;">
                                                         <ul id="note">
-                                                            <li>Click the green btn to go to the class</li>
+                                                            <li>Click the green button to go to the class</li>
                                                             <li>පංන්තියට ඇතුල් වීම සදහා කොළ පාට වී ඇති බොත්තම ඔබන්න</li>
                                                         </ul>
                                                     </div>
