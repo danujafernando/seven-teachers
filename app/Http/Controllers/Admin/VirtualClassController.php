@@ -240,8 +240,10 @@ class VirtualClassController extends Controller
             $extra_session->virtual_class_id = $id;
             $extra_session->extra_class = 1;
             $extra_session->save();
-        }                                
-        return view('admin.virtual_classes.session', compact('virtual_class', 'weeks', 'next_weeks', 'extra_session'));
+        }
+        $start_at = $this->time;
+        $end_at = $this->time;                                
+        return view('admin.virtual_classes.session', compact('virtual_class', 'weeks', 'next_weeks', 'start_at', 'end_at','extra_session'));
     }
 
     public function storeSession(Request $request){
@@ -261,7 +263,9 @@ class VirtualClassController extends Controller
         if($extra_class){
             $extra_class->virtual_class_url = $request->get('extra_class_url');
             $extra_class->tute_url = $request->get('extra_tute_url');
-            $extra_class->virtual_class_date = date('Y-m-d');
+            $extra_class->virtual_class_date = $request->get('extra_class_date');
+            $extra_class->extra_class_start_at = $request->get('extra_class_start_at');
+            $extra_class->extra_class_end_at = $request->get('extra_class_end_at');
             $extra_class->save();
         }
         session()->flash('success_message','Virtual class session has been set successfully');

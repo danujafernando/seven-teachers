@@ -45,7 +45,7 @@ var TableDatatablesManaged = function () {
                 [5, 15, 20, "All"] // change per page values here
             ],
             // set the initial value
-            "pageLength": 5,            
+            "pageLength": 10,            
             "pagingType": "bootstrap_full_number",
             "columnDefs": [
                 {  // set default column settings

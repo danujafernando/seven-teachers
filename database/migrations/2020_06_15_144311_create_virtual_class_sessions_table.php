@@ -21,6 +21,8 @@ class CreateVirtualClassSessionsTable extends Migration
             $table->string('virtual_class_url')->nullable();
             $table->string('tute_url')->nullable();
             $table->boolean('extra_class')->default(0);
+            $table->integer('extra_class_start_at')->default(0);
+            $table->integer('extra_class_end_at')->default(0);
             $table->boolean('status')->default(1);
             $table->timestamps();
 

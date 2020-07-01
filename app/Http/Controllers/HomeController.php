@@ -70,6 +70,12 @@ class HomeController extends Controller
                                                                                                 ->where('virtual_class_date', '<=', $last_day_this_month)
                                                                                                 ->where('extra_class', 1)
                                                                                                 ->first();
+                                            if($extra_virtual_class_session){
+                                                $extra_virtual_class_session->extra_class_start_at_2 =  $this->time2[$extra_virtual_class_session->extra_class_start_at - 1];
+                                                $extra_virtual_class_session->extra_class_end_at_2 =  $this->time2[$extra_virtual_class_session->extra_class_end_at - 1];
+                                                $extra_virtual_class_session->extra_class_start_at =  $this->time2[$extra_virtual_class_session->extra_class_start_at - 1];
+                                                $extra_virtual_class_session->extra_class_end_at =  $this->time2[$extra_virtual_class_session->extra_class_end_at - 1];
+                                            }                                                    
                                             $item->extra_virtual_class_session = $extra_virtual_class_session;                                 
                                             $item->start_at_2 =  $this->time2[$item->start_at - 1];
                                             $item->end_at_2 =  $this->time2[$item->end_at - 1]; 

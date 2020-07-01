@@ -6,7 +6,8 @@ var ComponentsDateTimePickers = function () {
             $('.closing_date').datepicker({
                 format: "yyyy-mm-dd",
                 orientation: "left",
-                autoclose: true
+                autoclose: true,
+                startDate: new Date()
             });
             //$('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
         }

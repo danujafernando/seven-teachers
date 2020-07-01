@@ -217,11 +217,17 @@
                                                                 @endforeach
                                                                 <?php $extra_virtual_class_session = $virtual_class->extra_virtual_class_session; ?>
                                                                 @if($extra_virtual_class_session)
-                                                                    @if($extra_virtual_class_session->virtual_class_url || $extra_virtual_class_session->tute_url)
+                                                                    <?php $class_start_time = $extra_virtual_class_session->virtual_class_date." ".$extra_virtual_class_session->extra_class_start_at;
+                                                                          $class_end_time = $extra_virtual_class_session->virtual_class_date." ".$extra_virtual_class_session->extra_class_end_at; ?>
                                                                     <tr>
-                                                                        <td>Extra Class</td>
+                                                                        <td>Extra Class - {{ $extra_virtual_class_session->virtual_class_date }} <br> {{ $extra_virtual_class_session->extra_class_start_at }} - {{ $extra_virtual_class_session->extra_class_end_at }}</td>
                                                                         <td>
-                                                                            <a href="{{ $extra_virtual_class_session->virtual_class_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Go To Class</a>
+                                                                            <div class="virtual-class" id="class-extra" data-id="class-extra" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
+                                                                                <button class="btn btn-danger vc-danger-btn btn-width">Session Closed</button>
+                                                                                <button class="btn btn-warning vc-warning-btn btn-width">Ready For Class</button>
+                                                                                <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
+                                                                                <a href="{{ $extra_virtual_class_session->virtual_class_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Go To Class</a>
+                                                                            </div>
                                                                         </td>
                                                                         <td>
                                                                             @if($extra_virtual_class_session->tute_url)
@@ -231,7 +237,6 @@
                                                                             @endif
                                                                         </td>
                                                                     </tr>
-                                                                    @endif
                                                                 @endif
                                                             </tbody>
                                                         </table>
@@ -239,7 +244,9 @@
                                                 </div>
                                             </div>
                                         @endforeach
-                                        
+                                        @if(count($virtual_classes) == 0)
+                                            You haven't made the payment yet for this month 
+                                        @endif
                                     </div>
                                 </div>
                             </div>
