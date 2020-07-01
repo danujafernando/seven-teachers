@@ -182,7 +182,6 @@ class StudentController extends Controller
                         $student->medium = $medium;
                         $student->save();
                         $message = "Welcome to SevenTeachers - DASHBOARD LOGGING \n\n";
-                        $message .= "Click for your Dashboard: ".route('login')."\n\n";
                         $message .= "HIGHLY CONFIDENTIAL\n";
                         $message .= "Username: ".$name."\n";
                         $message .= "Password: ".$password."\n\n";
@@ -278,6 +277,7 @@ class StudentController extends Controller
             $student->save();
             $message = "Your Dashboard \n\n";
             $message .= "Password has been changed \n\n";
+            $message .= "HIGHLY CONFIDENTIAL\n";
             $message .= "Username: ".$student->name."\n";
             $message .= "New Password: ".$password."\n";
             $sms = new SMSMessage();
