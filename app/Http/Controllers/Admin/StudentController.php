@@ -201,6 +201,7 @@ class StudentController extends Controller
                 }
                 array_push($status_message, $set);
             }
+            $i++;
         }
         session()->put('status_message', $status_message);
         return redirect()->back();
