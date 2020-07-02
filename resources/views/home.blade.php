@@ -263,8 +263,23 @@
         setInterval(function() {
             classData();
         }, 60 * 1000);
-        
+        userOnline();
+        setInterval(function() {
+            userOnline();
+        }, 5 * 60 * 1000);
     });
+    function userOnline(){
+        $.ajax({
+            url: "{{ route('student.online') }}",
+            type: 'post',
+			data: {
+				_token: "{{ csrf_token() }}",
+            },
+            success: function(data){
+                console.log(data);
+            }
+        });
+    }
     function classData(){
         $('.virtual-class').each(function(){
             var id = $(this).data('id');

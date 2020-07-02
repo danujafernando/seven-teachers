@@ -85,4 +85,5 @@ Route::get('register', function(){
 });
 
 Route::get('home', 'HomeController@index')->name('home');
+Route::post('student/online', 'HomeController@online')->name('student.online');
 Route::post('student/update', 'HomeController@update')->name('student.update');

@@ -6,6 +6,7 @@ use App\Banner;
 use App\Student;
 use App\VirtualClass;
 use App\VirtualClassSession;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -86,6 +87,11 @@ class HomeController extends Controller
         return view('home', compact('virtual_classes', 'student', 'banner'));
     }
 
+    public function online(){
+        $expiresAt = Carbon::now()->addMinutes(5);
+        Cache::put('user-is-online-' . Auth::user()->id, true, $expiresAt);
+        return "OK";
+    }
     public function update(Request $request){
         $log_user = Auth::user();
         $student = Student::find($log_user->id);
