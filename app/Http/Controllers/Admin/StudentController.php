@@ -117,10 +117,11 @@ class StudentController extends Controller
         $student->grade = $request->get('grade');
         $student->medium = $request->get('medium');
         $student->save();
-        $message = "Welcome to SevenTeachers \n\n";
-        $message .= "Click for your Dashboard: ".route('login')."\n\n";
+        $message = "Welcome to SevenTeachers - DASHBOARD LOGGING \n\n";
+        $message .= "HIGHLY CONFIDENTIAL\n";
         $message .= "Username: ".$student->name."\n";
-        $message .= "Password: ".$password."\n";
+        $message .= "Password: ".$password."\n\n";
+        $message .= "Dashboard Manual https://youtu.be/vB_ccCEsBuU";
         $sms = new SMSMessage();
         $sms->number = $student->contact_no;
         $sms->message = $message;
