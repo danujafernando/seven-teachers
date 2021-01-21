@@ -94,8 +94,8 @@ class HomeController extends Controller
     }
 
     public function online(){
-        $expiresAt = Carbon::now()->addMinutes(5);
-        Cache::put('user-is-online-' . Auth::user()->id, true, $expiresAt);
+        //$expiresAt = Carbon::now()->addMinutes(5);
+        //Cache::put('user-is-online-' . Auth::user()->id, true, $expiresAt);
         return "OK";
     }
     public function update(Request $request){

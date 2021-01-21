@@ -61,7 +61,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email',
             'name' => 'required|string|max:255|unique:users,name',
             'password' => 'required|string|max:255|min:6',
             'full_name' => 'string|max:255',
@@ -75,7 +75,6 @@ class StudentController extends Controller
         $message = [
             'email.required' => 'The email field is required',
             'email.email' => 'The email should be valid email',
-            'email.unique' => 'This email already exists',
             'name.required' => 'The username field is required',
             'name.string' => 'The username should be string',
             'name.unique' => 'This username already exists',
@@ -237,6 +236,8 @@ class StudentController extends Controller
         ];
 
         $message = [
+            'email.required' => 'The email field is required',	
+            'email.email' => 'The email should be valid email',
             'full_name.string' => 'The full_name should be string',
             'full_name.max' => 'Maximum characters is 255',
             'contact_no.string' => 'The contact_no should be string',
@@ -258,6 +259,7 @@ class StudentController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        $student->email = $request->get('email');
         $student->full_name = $request->get('full_name');
         $student->contact_no = $request->get('contact_no');
         $student->address = $request->get('address');

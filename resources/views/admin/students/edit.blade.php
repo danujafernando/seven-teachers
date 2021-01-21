@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <span class="form-error">
                                     <label>Email</label>
-                                    <input type="email" readonly value="{{ $student->email }}" name="email" id="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email">
+                                    <input type="email" value="{{ $student->email }}" name="email" id="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email">
                                 </span>
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">
