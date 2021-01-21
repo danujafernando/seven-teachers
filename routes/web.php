@@ -68,7 +68,7 @@ Route::group(['prefix'=>'administrator'], function() {
     Route::get('virtual-class/{id}/payments','Admin\VirtualClassController@paymentList')->name('virtual.classes.payment.get');
     Route::post('virtual-class/{id}/payments','Admin\VirtualClassController@storePayments')->name('virtual.classes.payment.post');
     Route::post('virtual-class/{id}/payments/remove/{payment_id}','Admin\VirtualClassController@removePayments')->name('virtual.classes.payment.remove.post');
-
+    Route::post('virtual-class/{id}/payments/all/remove/','Admin\VirtualClassController@removeAllPayments')->name('virtual.classes.all.payment.remove.post');
     Route::get('banners/{grade?}','Admin\BannerController@show')->name('banner.get');
     Route::post('banners','Admin\BannerController@upload')->name('banner.post');
     Route::post('banner/remove/{id}/{slot}','Admin\BannerController@remove')->name('banner.remove.post');

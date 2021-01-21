@@ -251,10 +251,12 @@ class VirtualClassController extends Controller
         for($i = 0; $i < count($session_classes); $i++){
             $class_url = $request->get('class_url_'.$session_classes[$i]);
             $tute_url = $request->get('tute_url_'.$session_classes[$i]);
+            $exam_url = $request->get('exam_url_'.$session_classes[$i]);
             $session_class = VirtualClassSession::find($session_classes[$i]);
             if($session_class){
                 $session_class->virtual_class_url = $class_url;
                 $session_class->tute_url = $tute_url;
+                $session_class->exam_url = $exam_url;
                 $session_class->save();
             }
         }
@@ -263,6 +265,7 @@ class VirtualClassController extends Controller
         if($extra_class){
             $extra_class->virtual_class_url = $request->get('extra_class_url');
             $extra_class->tute_url = $request->get('extra_tute_url');
+            $extra_class->exam_url = $request->get('extra_exam_url');
             $extra_class->virtual_class_date = $request->get('extra_class_date');
             $extra_class->extra_class_start_at = $request->get('extra_class_start_at');
             $extra_class->extra_class_end_at = $request->get('extra_class_end_at');
@@ -399,5 +402,27 @@ class VirtualClassController extends Controller
         $payment->save();
         session()->flash('success_message','Payment has been removed successfully');
         return redirect()->back();
+    }
+
+    public function removeAllPayments($id){
+        $virtual_class = VirtualClass::find($id);
+        if(!$virtual_class)
+        {
+            session()->flash('error_message','Virtual Class doesn\'t exist');
+            return redirect()->to(route('virtual.classes.list.get'));
+        }
+
+        $month = date('n');
+        $year = date('Y');
+        Payment::from('payments as p')
+                            ->select('p.id', 's.name')
+                            ->join('students as s', 'p.student_id', '=', 's.id') 
+                            ->where('p.virtual_class_id', $id)
+                            ->where('p.year', $year)
+                            ->where('p.month', $month)
+                            ->where('p.status', 1)
+                            ->update(['p.status' => 0]);
+        session()->flash('success_message','Payments have been removed successfully');
+        return redirect()->back();                       
     }
 }

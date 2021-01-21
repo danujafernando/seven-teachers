@@ -72,10 +72,16 @@ class HomeController extends Controller
                                                                                                 ->where('extra_class', 1)
                                                                                                 ->first();
                                             if($extra_virtual_class_session){
-                                                $extra_virtual_class_session->extra_class_start_at_2 =  $this->time2[$extra_virtual_class_session->extra_class_start_at - 1];
-                                                $extra_virtual_class_session->extra_class_end_at_2 =  $this->time2[$extra_virtual_class_session->extra_class_end_at - 1];
-                                                $extra_virtual_class_session->extra_class_start_at =  $this->time2[$extra_virtual_class_session->extra_class_start_at - 1];
-                                                $extra_virtual_class_session->extra_class_end_at =  $this->time2[$extra_virtual_class_session->extra_class_end_at - 1];
+                                                $extra_virtual_class_session->extra_class_start_at_2  = null;
+                                                $extra_virtual_class_session->extra_class_end_at_2 = null;
+                                                if($extra_virtual_class_session->extra_class_start_at){
+                                                    $extra_virtual_class_session->extra_class_start_at_2 =  $this->time2[$extra_virtual_class_session->extra_class_start_at - 1];
+                                                    $extra_virtual_class_session->extra_class_start_at =  $this->time2[$extra_virtual_class_session->extra_class_start_at - 1];
+                                                }
+                                                if($extra_virtual_class_session->extra_class_end_at){
+                                                    $extra_virtual_class_session->extra_class_end_at =  $this->time2[$extra_virtual_class_session->extra_class_end_at - 1];
+                                                    $extra_virtual_class_session->extra_class_end_at_2 =  $this->time2[$extra_virtual_class_session->extra_class_end_at - 1];
+                                                }
                                             }                                                    
                                             $item->extra_virtual_class_session = $extra_virtual_class_session;                                 
                                             $item->start_at_2 =  $this->time2[$item->start_at - 1];

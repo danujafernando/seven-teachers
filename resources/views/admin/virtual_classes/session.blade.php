@@ -8,9 +8,10 @@
                 <li class="active"><a data-toggle="tab" href="#this-month">This month</a></li>
                 <li><a data-toggle="tab" href="#next-month">Next month</a></li>
               </ul>
+              <form action="{{ route('virtual.classes.session.post', [ $virtual_class->id ]) }}" method="post" role="form" class="category-create-form">
               <div class="tab-content">
                 <div id="this-month" class="tab-pane fade in active">
-                  <form action="{{ route('virtual.classes.session.post', [ $virtual_class->id ]) }}" method="post" role="form" class="category-create-form">
+                  
                     {{ csrf_field() }}
                     <div class="form-body">
                       @for($i = 0; $i < count($weeks); $i++)
@@ -30,6 +31,12 @@
                           <div class="form-group">
                             <label>Tute Url</label>
                             <input type="text" @if(!$weeks[$i]['editable'])  readonly @endif value="{{ $session_class->tute_url }}" name="tute_url_{{ $session_class->id }}" id="tute_url_{{ $session_class->id }}" class="form-control input-icon" placeholder="Tute Url">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Exam Url</label>
+                            <input type="text" @if(!$weeks[$i]['editable'])  readonly @endif value="{{ $session_class->exam_url }}" name="exam_url_{{ $session_class->id }}" id="exam_url_{{ $session_class->id }}" class="form-control input-icon" placeholder="Exam Url">
                           </div>
                         </div>
                       </div>
@@ -80,17 +87,20 @@
                             <input type="text" value="{{ $extra_session->tute_url }}" name="extra_tute_url" id="tute_url" class="form-control input-icon" placeholder="Tute Url">
                           </div>
                         </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Exam Url</label>
+                            <input type="text" value="{{ $extra_session->exam_url }}" name="extra_exam_url" id="exam_url" class="form-control input-icon" placeholder="Exam Url">
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div class="form-actions">
                         <button type="submit" class="btn blue">Submit</button>
                         <a href="{{ route('virtual.classes.list.get') }}" class="btn default">Cancel</a>
                     </div>
-                  </form>
                 </div>
                 <div id="next-month" class="tab-pane fade">
-                  <form action="{{ route('virtual.classes.session.post', [ $virtual_class->id ]) }}" method="post" role="form" class="category-create-form">
-                    {{ csrf_field() }}
                     <div class="form-body">
                       @for($i = 0; $i < count($next_weeks); $i++)
                       <div class="row">
@@ -111,6 +121,12 @@
                             <input type="text" @if(!$next_weeks[$i]['editable'])  readonly @endif value="{{ $session_class->tute_url }}" name="tute_url_{{ $session_class->id }}" id="tute_url_{{ $session_class->id }}" class="form-control input-icon" placeholder="Tute Url">
                           </div>
                         </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Exam Url</label>
+                            <input type="text" @if(!$next_weeks[$i]['editable'])  readonly @endif value="{{ $session_class->exam_url }}" name="exam_url_{{ $session_class->id }}" id="exam_url_{{ $session_class->id }}" class="form-control input-icon" placeholder="Exam Url">
+                          </div>
+                        </div>
                       </div>
                       @endfor
                     </div>
@@ -118,9 +134,9 @@
                         <button type="submit" class="btn blue">Submit</button>
                         <a href="{{ route('virtual.classes.list.get') }}" class="btn default">Cancel</a>
                     </div>
-                  </form>
                 </div>
               </div>
+            </form>
         </div>
     </div>
 @endsection

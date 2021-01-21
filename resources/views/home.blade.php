@@ -78,7 +78,7 @@
                                         <div class="col-md-3 col-sm-6 col-xs-6">Grade</div>
                                         <div class="col-md-6 col-sm-6 col-xs-6">
                                             <div class="form-group">
-                                                <select name="grade" readonly id="grade" class="form-control">
+                                                <select name="grade" id="grade" class="form-control">
                                                     <option value="6" @if($student->grade == 6) selected @endif> Grade 6</option>
                                                     <option value="7" @if($student->grade == 7) selected @endif> Grade 7</option>
                                                     <option value="8" @if($student->grade == 8) selected @endif> Grade 8</option>
@@ -92,11 +92,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if(false)
                                 <div class="form-actions">
                                     <button type="submit" class="btn btn-primary primary-color">Submit</button>
                                 </div>
-                                @endif
                             </form>
                         </div>
                         <div id="updates" class="tab-pane fade" role="tabpanel">
@@ -169,6 +167,7 @@
                                                                     <th>Week</th>
                                                                     <th>Class</th>
                                                                     <th>Tute</th>
+                                                                    <th>Exam</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -177,8 +176,8 @@
                                                                 <?php 
                                                                     $expire = 0;
                                                                     $ready = 1;
-                                                                    $class_start_time = $virtual_class_session->virtual_class_date." ".$virtual_class->start_at;
-                                                                    $class_end_time = $virtual_class_session->virtual_class_date." ".$virtual_class->end_at;
+                                                                    $class_start_time = date('m/d/Y', strtotime($virtual_class_session->virtual_class_date))." ".$virtual_class->start_at;
+                                                                    $class_end_time = date('m/d/Y', strtotime($virtual_class_session->virtual_class_date))." ".$virtual_class->end_at;
                                                                     if(strtotime($virtual_class_session->virtual_class_date) < strtotime("today")) {
                                                                         $expire = 1;
                                                                     }else if(strtotime($virtual_class_session->virtual_class_date) == strtotime("today")){
@@ -213,12 +212,22 @@
                                                                             @endif
                                                                         </div>
                                                                     </td>
+                                                                    <td>
+                                                                        <div id="{{ "exam-".$loop->parent->iteration."-".$loop->iteration }}" data-id="{{ "exam-".$loop->parent->iteration."-".$loop->iteration }}" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
+                                                                            
+                                                                            @if($virtual_class_session->exam_url)
+                                                                                <a href="{{ $virtual_class_session->exam_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Goto exam</a>
+                                                                            @else 
+                                                                                <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
+                                                                            @endif
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
                                                                 @endforeach
                                                                 <?php $extra_virtual_class_session = $virtual_class->extra_virtual_class_session; ?>
                                                                 @if($extra_virtual_class_session)
-                                                                    <?php $class_start_time = $extra_virtual_class_session->virtual_class_date." ".$extra_virtual_class_session->extra_class_start_at;
-                                                                          $class_end_time = $extra_virtual_class_session->virtual_class_date." ".$extra_virtual_class_session->extra_class_end_at; ?>
+                                                                    <?php $class_start_time = date('m/d/Y', strtotime($extra_virtual_class_session->virtual_class_date))." ".$extra_virtual_class_session->extra_class_start_at;
+                                                                          $class_end_time = date('m/d/Y', strtotime($extra_virtual_class_session->virtual_class_date))." ".$extra_virtual_class_session->extra_class_end_at; ?>
                                                                     <tr>
                                                                         <td>Extra Class - {{ $extra_virtual_class_session->virtual_class_date }} <br> {{ $extra_virtual_class_session->extra_class_start_at }} - {{ $extra_virtual_class_session->extra_class_end_at }}</td>
                                                                         <td>
@@ -232,6 +241,13 @@
                                                                         <td>
                                                                             @if($extra_virtual_class_session->tute_url)
                                                                                 <a href="{{ $extra_virtual_class_session->tute_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Download tute</a>
+                                                                            @else 
+                                                                                <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
+                                                                            @endif
+                                                                        </td>
+                                                                        <td>
+                                                                            @if($extra_virtual_class_session->exam_url)
+                                                                                <a href="{{ $extra_virtual_class_session->exam_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Goto Exam</a>
                                                                             @else 
                                                                                 <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
                                                                             @endif

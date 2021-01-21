@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\SMSMessage;
+use App\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 
 class SendSMS extends Command
 {

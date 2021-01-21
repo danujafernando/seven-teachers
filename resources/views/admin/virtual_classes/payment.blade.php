@@ -67,7 +67,14 @@
                 </div>
                 <div id="paid-list" class="tab-pane fade">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="margin-bottom: 10px">
+                            <a class="btn btn-danger" onclick="event.preventDefault();
+                            document.getElementById('payment-remove-all').submit();"> Delete All Payments</a>
+                            <form id="payment-remove-all" action="{{ route('virtual.classes.all.payment.remove.post', [$virtual_class->id]) }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                        <div class="col-md-12 mt-3">
                             <table class="table table-stripe table-bordered table-hover table-checkable order-column dataTable no-footer" id="user_list_table" role="grid">
                                 <thead>
                                     <tr>
