@@ -65,14 +65,8 @@ class LoginController extends Controller
 
             return $this->sendLockoutResponse($request);
         }
-        $login_status = 1;
-        $student = Student::where('name', $request->get($this->username()))->first();
-        if($student){
-            if(Cache::has('user-is-online-' . $student->id)){
-                $login_status = 0;
-            }
-        }
-        if (Auth::attempt([ $this->username() => $request->get($this->username()), 'password' => $request->get('password'), 'login_status' => $login_status,'status' => 1 ])) {
+
+        if (Auth::attempt([ $this->username() => $request->get($this->username()), 'password' => $request->get('password'), 'status' => 1 ])) {
             return $this->sendLoginResponse($request);
         }
         /*
