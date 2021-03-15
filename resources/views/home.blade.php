@@ -348,7 +348,7 @@
                                                                             <button class="btn btn-danger vc-danger-btn btn-width">Exam Closed</button>
                                                                             <button class="btn btn-warning vc-warning-btn btn-width blink">Ready For Exam</button>
                                                                             <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
-                                                                            <a href="{{ $virtual_exam->exam_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width blink" style="color: white;">Goto Exam</a>
+                                                                            <a href="{{ $virtual_exam->exam_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width blink" style="color: white;">Go To Exam</a>
                                                                         </div>
                                                                     </td>
                                                                     <td>
