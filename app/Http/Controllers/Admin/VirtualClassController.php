@@ -241,9 +241,63 @@ class VirtualClassController extends Controller
             $extra_session->extra_class = 1;
             $extra_session->save();
         }
+        $recording = VirtualClassSession::where('virtual_class_id', $id)
+                                        ->where('status', 1)
+                                        ->where('is_recording', 1)
+                                        ->first();
+        if(!$recording){
+            $recording = new VirtualClassSession();
+            $recording->virtual_class_id = $id;
+            $recording->is_recording = 1;
+            $recording->save();
+        }                                
+        $this->setExams($id);
+        $exams = VirtualClassSession::where('virtual_class_id', $id)
+                                        ->where('status', 1)
+                                        ->where('is_exam', 1)
+                                        ->where('extra_class', 0)
+                                        ->get();
+
         $start_at = $this->time;
         $end_at = $this->time;                                
-        return view('admin.virtual_classes.session', compact('virtual_class', 'weeks', 'next_weeks', 'start_at', 'end_at','extra_session'));
+        return view('admin.virtual_classes.session', compact('virtual_class', 'weeks', 'next_weeks', 'start_at', 'end_at','extra_session', 'exams', 'recording'));
+    }
+
+    public function storeRecordingSession(Request $request){
+
+        $session_recording = $request->get('session_recording');
+        $recoring = VirtualClassSession::find($session_recording);
+        if($recoring){
+            $recoring->virtual_class_date =  $request->get('recording_date_'.$session_recording);
+            $recoring->recording_url =  $request->get('recording_url_'.$session_recording);
+            $recoring->note = $request->get('note_'.$session_recording);
+            $recoring->save();
+        }
+        session()->flash('success_message','Virtual recording have been set successfully');
+        return redirect()->back();
+    }
+
+    public function storeExamsSession(Request $request){
+        $session_exams = $request->get('session_exams');
+        for($i = 0; $i < count($session_exams); $i++){
+            $exam_url = $request->get('exam_url_'.$session_exams[$i]);
+            $answer_url = $request->get('answer_url_'.$session_exams[$i]);
+            $exam_date = $request->get('exam_date_'.$session_exams[$i]);
+            $exam_start_at = $request->get('exam_start_at_'.$session_exams[$i]);
+            $exam_end_at = $request->get('exam_end_at_'.$session_exams[$i]);
+            
+            $exam = VirtualClassSession::find($session_exams[$i]);
+            if($exam){
+                $exam->exam_url = $exam_url;
+                $exam->answer_url = $answer_url;
+                $exam->virtual_class_date = $exam_date;
+                $exam->extra_class_start_at = $exam_start_at;
+                $exam->extra_class_end_at = $exam_end_at;
+                $exam->save();
+            }
+        }
+        session()->flash('success_message','Virtual exams have been set successfully');
+        return redirect()->back();
     }
 
     public function storeSession(Request $request){
@@ -251,12 +305,10 @@ class VirtualClassController extends Controller
         for($i = 0; $i < count($session_classes); $i++){
             $class_url = $request->get('class_url_'.$session_classes[$i]);
             $tute_url = $request->get('tute_url_'.$session_classes[$i]);
-            $exam_url = $request->get('exam_url_'.$session_classes[$i]);
             $session_class = VirtualClassSession::find($session_classes[$i]);
             if($session_class){
                 $session_class->virtual_class_url = $class_url;
                 $session_class->tute_url = $tute_url;
-                $session_class->exam_url = $exam_url;
                 $session_class->save();
             }
         }
@@ -265,7 +317,6 @@ class VirtualClassController extends Controller
         if($extra_class){
             $extra_class->virtual_class_url = $request->get('extra_class_url');
             $extra_class->tute_url = $request->get('extra_tute_url');
-            $extra_class->exam_url = $request->get('extra_exam_url');
             $extra_class->virtual_class_date = $request->get('extra_class_date');
             $extra_class->extra_class_start_at = $request->get('extra_class_start_at');
             $extra_class->extra_class_end_at = $request->get('extra_class_end_at');
@@ -273,6 +324,20 @@ class VirtualClassController extends Controller
         }
         session()->flash('success_message','Virtual class session has been set successfully');
         return redirect()->back();
+    }
+
+    public function setExams($virtual_class_id){
+        $exams = VirtualClassSession::where('virtual_class_id', $virtual_class_id)
+                                        ->where('status', 1)
+                                        ->where('is_exam', 1)
+                                        ->where('extra_class', 0)
+                                        ->get();
+        for($i = 0; $i < 5 - count($exams); $i++){
+            $extra_session = new VirtualClassSession();
+            $extra_session->virtual_class_id = $virtual_class_id;
+            $extra_session->is_exam = 1;
+            $extra_session->save();
+        }                                
     }
 
     public function get_days_in_month($virtual_class_id, $day, $first_day_this_month, $last_day_this_month){
@@ -294,6 +359,8 @@ class VirtualClassController extends Controller
                                                 ->where('virtual_class_id', $virtual_class_id)
                                                 ->where('status', 1)
                                                 ->where('extra_class', 0)
+                                                ->where('is_exam', 0)
+                                                ->where('is_recording', 0)
                                                 ->first();
                 if(!$session){
                     $session = new VirtualClassSession();

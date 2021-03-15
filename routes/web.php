@@ -65,6 +65,8 @@ Route::group(['prefix'=>'administrator'], function() {
     Route::post('virtual-class/activate/{id}','Admin\VirtualClassController@activate')->name('virtual.classes.activate');
     Route::get('virtual-class/{id}/sessions','Admin\VirtualClassController@sessionList')->name('virtual.classes.session.get');
     Route::post('virtual-class/{id}/sessions','Admin\VirtualClassController@storeSession')->name('virtual.classes.session.post');
+    Route::post('virtual-class/{id}/exams','Admin\VirtualClassController@storeExamsSession')->name('virtual.classes.exams.post');
+    Route::post('virtual-class/{id}/recording','Admin\VirtualClassController@storeRecordingSession')->name('virtual.classes.recording.post');
     Route::get('virtual-class/{id}/payments','Admin\VirtualClassController@paymentList')->name('virtual.classes.payment.get');
     Route::post('virtual-class/{id}/payments','Admin\VirtualClassController@storePayments')->name('virtual.classes.payment.post');
     Route::post('virtual-class/{id}/payments/remove/{payment_id}','Admin\VirtualClassController@removePayments')->name('virtual.classes.payment.remove.post');

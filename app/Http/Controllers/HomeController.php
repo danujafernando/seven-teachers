@@ -64,6 +64,9 @@ class HomeController extends Controller
                                                                              ->where('virtual_class_date', '>=', $first_day_this_month)
                                                                              ->where('virtual_class_date', '<=', $last_day_this_month)
                                                                              ->where('virtual_class_day', '=', $item->day)
+                                                                             ->where('is_exam', 0)
+                                                                             ->where('extra_class', 0)
+                                                                             ->where('is_recording', 0)
                                                                              ->get();
                                             $item->virtual_class_sessions = $virtual_class_sessions;
                                             $extra_virtual_class_session = VirtualClassSession::where('virtual_class_id', $item->id)
@@ -82,14 +85,39 @@ class HomeController extends Controller
                                                     $extra_virtual_class_session->extra_class_end_at_2 =  $this->time2[$extra_virtual_class_session->extra_class_end_at - 1];
                                                     $extra_virtual_class_session->extra_class_end_at =  $this->time2[$extra_virtual_class_session->extra_class_end_at - 1];
                                                 }
-                                            }                                                    
-                                            $item->extra_virtual_class_session = $extra_virtual_class_session;                                 
+                                            }   
+                                            //dd($this->time);                                                 
+                                            $item->extra_virtual_class_session = $extra_virtual_class_session;
+                                            $recording = VirtualClassSession::where('virtual_class_id', $item->id)
+                                                                                ->where('status', 1)
+                                                                                ->where('is_recording', 1)
+                                                                                ->first(); 
+                                            $item->recording = $recording;                                                                    
+                                            $exams = VirtualClassSession::where('virtual_class_id', $item->id)
+                                                                            ->where('status', 1)
+                                                                            ->where('is_exam', 1)
+                                                                            ->get()
+                                                                            ->map(function($item){
+                                                                                //dd($this->time2[$item->extra_class_start_at]);
+                                                                                $item->show = 1;
+                                                                                if($item->extra_class_start_at && $item->extra_class_end_at){
+                                                                                    $item->start_at_2 =  $this->time2[$item->extra_class_start_at - 1];
+                                                                                    $item->end_at_2 =  $this->time2[$item->extra_class_end_at - 1]; 
+                                                                                    $item->start_at =  $this->time[$item->extra_class_start_at - 1];
+                                                                                    $item->end_at =  $this->time[$item->extra_class_end_at - 1]; 
+                                                                                }else{
+                                                                                    $item->show = 0;
+                                                                                }
+                                                                                
+                                                                                return $item;
+                                                                            }); 
+                                            $item->exams = $exams;                           
                                             $item->start_at_2 =  $this->time2[$item->start_at - 1];
                                             $item->end_at_2 =  $this->time2[$item->end_at - 1]; 
                                             $item->start_at =  $this->time[$item->start_at - 1];
                                             $item->end_at =  $this->time[$item->end_at - 1];                                        
                                             return $item;
-                                        });                                                                       
+                                        });                      
         return view('home', compact('virtual_classes', 'student', 'banner'));
     }
 

@@ -16,7 +16,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
@@ -67,6 +67,9 @@
         .btn-width{
             width: 150px;
         } 
+        .btn-width-recording{
+            width: 180px;
+        }
         #note{
             list-style: none;
             padding: 0;
@@ -78,6 +81,24 @@
             display: inline-block;
             font-size: 16px;
             margin-right: 3px;
+        }
+
+        @-webkit-keyframes blinker {
+            from {
+                opacity: 1.0;
+            }
+            to {
+                opacity: 0.5;
+            }
+        }
+
+        .blink{
+            text-decoration: blink;
+            -webkit-animation-name: blinker;
+            -webkit-animation-duration: 1s;
+            -webkit-animation-iteration-count:infinite;
+            -webkit-animation-timing-function:ease-in-out;
+            -webkit-animation-direction: alternate;
         }
     </style>
 </head>

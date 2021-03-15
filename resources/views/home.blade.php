@@ -23,6 +23,9 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#virtual_classes" role="tab" aria-controls="virtual_classes" aria-selected="true">Virtual Classes</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#virtual_exams" role="tab" aria-controls="virtual_exams" aria-selected="true">Virtual Exams</a>
+                        </li>
                     </ul> 
                     <div class="tab-content">
                         <div id="profile" class="tab-pane fade show active" role="tabpanel">
@@ -161,13 +164,13 @@
                                                         </ul>
                                                     </div>
                                                     <div class="col-md-12">
+                                                        <h5>Classes</h5>
                                                         <table class="table table-striped">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Week</th>
-                                                                    <th>Class</th>
-                                                                    <th>Tute</th>
-                                                                    <th>Exam</th>
+                                                                    <th width="25%">Week</th>
+                                                                    <th width="25%">Class</th>
+                                                                    <th width="25%">Tute</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -197,9 +200,9 @@
                                                                     <td>
                                                                         <div class="virtual-class" id="{{ "class-".$loop->parent->iteration."-".$loop->iteration }}" data-id="{{ "class-".$loop->parent->iteration."-".$loop->iteration }}" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
                                                                             <button class="btn btn-danger vc-danger-btn btn-width">Session Closed</button>
-                                                                            <button class="btn btn-warning vc-warning-btn btn-width">Ready For Class</button>
+                                                                            <button class="btn btn-warning vc-warning-btn btn-width blink">Ready For Class</button>
                                                                             <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
-                                                                            <a href="{{ $virtual_class_session->virtual_class_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Go To Class</a>
+                                                                            <a href="{{ $virtual_class_session->virtual_class_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width blink" style="color: white;">Go To Class</a>
                                                                         </div>
                                                                     </td>
                                                                     <td>
@@ -207,16 +210,6 @@
                                                                             
                                                                             @if($virtual_class_session->tute_url)
                                                                                 <a href="{{ $virtual_class_session->tute_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Download tute</a>
-                                                                            @else 
-                                                                                <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
-                                                                            @endif
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div id="{{ "exam-".$loop->parent->iteration."-".$loop->iteration }}" data-id="{{ "exam-".$loop->parent->iteration."-".$loop->iteration }}" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
-                                                                            
-                                                                            @if($virtual_class_session->exam_url)
-                                                                                <a href="{{ $virtual_class_session->exam_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Goto exam</a>
                                                                             @else 
                                                                                 <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
                                                                             @endif
@@ -233,9 +226,9 @@
                                                                         <td>
                                                                             <div class="virtual-class" id="class-extra" data-id="class-extra" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
                                                                                 <button class="btn btn-danger vc-danger-btn btn-width">Session Closed</button>
-                                                                                <button class="btn btn-warning vc-warning-btn btn-width">Ready For Class</button>
+                                                                                <button class="btn btn-warning vc-warning-btn btn-width blink">Ready For Class</button>
                                                                                 <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
-                                                                                <a href="{{ $extra_virtual_class_session->virtual_class_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Go To Class</a>
+                                                                                <a href="{{ $extra_virtual_class_session->virtual_class_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width blink" style="color: white;">Go To Class</a>
                                                                             </div>
                                                                         </td>
                                                                         <td>
@@ -245,15 +238,132 @@
                                                                                 <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
                                                                             @endif
                                                                         </td>
-                                                                        <td>
-                                                                            @if($extra_virtual_class_session->exam_url)
-                                                                                <a href="{{ $extra_virtual_class_session->exam_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Goto Exam</a>
+                                                                    </tr>
+                                                                @endif
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <?php $recordings = $virtual_class->recording; ?>
+                                                    @if($recordings)
+                                                    <div class="col-md-12" style="margin-top: 5px; margin-bottom: 15px;">
+                                                        <h5>Recordings</h5>
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th width="25%">Date</th>
+                                                                    <th width="25%">Class</th>
+                                                                    <th width="25%">Note</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php $class_start_time = date('m/d/Y', strtotime($recordings->virtual_class_date))." 00:00:00";
+                                                                    $class_end_time = date('m/d/Y', strtotime($recordings->virtual_class_date))." 23:59:59"; ?>
+                                                                <tr>
+                                                                    <td>{{ $recordings->virtual_class_date }}</td>
+                                                                    <td>
+                                                                        <div class="virtual-class" id="recording" data-id="recording" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
+                                                                            <button class="btn btn-danger vc-danger-btn btn-width-recording"><i class="fa fa-video-camera"></i> Session Closed</button>
+                                                                            <button class="btn btn-warning vc-warning-btn btn-width-recording"><i class="fa fa-video-camera blink"></i> Ready For Recording</button>
+                                                                            <button class="btn btn-default vc-default-btn btn-width-recording"><i class="fa fa-video-camera"></i> Not Available</button>
+                                                                            <a href="{{ $recordings->recording_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width-recording blink"><i class="fa fa-video-camera"></i> Watch</a>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td >{{ $recordings->note }}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @if(count($virtual_classes) == 0)
+                                            You haven't made the payment yet for this month 
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="virtual_exams" class="tab-pane fade" role="tabpanel">
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-md-12">
+                                    <ul class="nav nav-tabs" id="sub-tabs">
+                                        @foreach($virtual_classes as $virtual_class)
+                                            <li class="nav-item">
+                                                <a class="nav-link @if($loop->iteration == 1) active  @endif" data-toggle="tab" href="#subject-{{ $loop->iteration }}" role="tab" aria-controls="subject-{{ $loop->iteration }}" aria-selected="true">{{ $virtual_class->subject_name}}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    <div class="tab-content">
+                                        @foreach($virtual_classes as $virtual_class)
+                                            <div id="subject-{{ $loop->iteration }}" class="tab-pane fade @if($loop->iteration == 1) show active @endif" role="tabpanel">
+                                                <div class="row" style="margin-top: 15px;">
+                                                    <div class="col-md-12" style="margin-top: 5px; margin-bottom: 15px;">
+                                                        <strong>Teacher:</strong> {{ $virtual_class->teacher_name }}<br>
+                                                    </div>
+                                                    <div class="col-md-12" style="margin-top: 5px; margin-bottom: 5px;">
+                                                        <ul id="note">
+                                                            <li>Click the green button to take the exam</li>
+                                                            <li>විභාගය සහභාගී වීම සදහා කොළ පාට වී ඇති බොත්තම ඔබන්න</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <h5>Exams</h5>
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th width="25%">Week</th>
+                                                                    <th width="25%">Exam</th>
+                                                                    <th width="25%">Answers sheet</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php $virtual_exams = $virtual_class->exams; ?>
+                                                                @foreach($virtual_exams as $virtual_exam)
+
+                                                                @if($virtual_exam->exam_url && $virtual_exam->show)
+                                                                <?php 
+                                                                    $expire = 0;
+                                                                    $ready = 1;
+                                                                    $class_start_time = date('m/d/Y', strtotime($virtual_exam->virtual_class_date))." ".$virtual_exam->start_at;
+                                                                    $class_end_time = date('m/d/Y', strtotime($virtual_exam->virtual_class_date))." ".$virtual_exam->end_at;
+                                                                    if(strtotime($virtual_exam->virtual_class_date) < strtotime("today")) {
+                                                                        $expire = 1;
+                                                                    }else if(strtotime($virtual_exam->virtual_class_date) == strtotime("today")){
+                                                                        if(strtotime($class_start_time) <= strtotime("now") && strtotime($class_end_time) >= strtotime("now")){
+                                                                            $ready = 0;
+                                                                        }else if(strtotime($class_end_time) < strtotime("now")){
+                                                                            $expire = 1;
+                                                                        }else{
+                                                                            if(strtotime($class_start_time) > strtotime("now") + 900){
+                                                                                $ready = 2;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ?>
+                                                                <tr>
+                                                                    <td>Exam {{ $loop->iteration }} - {{ $virtual_exam->virtual_class_date }} - {{ $virtual_exam->start_at_2 }} - {{ $virtual_exam->end_at_2 }}</td>
+                                                                    <td>
+                                                                        <div class="virtual-class" id="{{ "class-".$loop->parent->iteration."-".$loop->iteration }}" data-id="{{ "class-".$loop->parent->iteration."-".$loop->iteration }}" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
+                                                                            <button class="btn btn-danger vc-danger-btn btn-width">Exam Closed</button>
+                                                                            <button class="btn btn-warning vc-warning-btn btn-width blink">Ready For Exam</button>
+                                                                            <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
+                                                                            <a href="{{ $virtual_exam->exam_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width blink" style="color: white;">Goto Exam</a>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div id="{{ "tute-".$loop->parent->iteration."-".$loop->iteration }}" data-id="{{ "tute-".$loop->parent->iteration."-".$loop->iteration }}" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
+                                                                            
+                                                                            @if($virtual_exam->answer_url)
+                                                                                <a href="{{ $virtual_class_session->answer_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Download Answers</a>
                                                                             @else 
                                                                                 <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
                                                                             @endif
-                                                                        </td>
-                                                                    </tr>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
                                                                 @endif
+                                                                @endforeach
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -279,23 +389,8 @@
         setInterval(function() {
             classData();
         }, 60 * 1000);
-        userOnline();
-        setInterval(function() {
-            userOnline();
-        }, 5 * 60 * 1000);
     });
-    function userOnline(){
-        $.ajax({
-            url: "{{ route('student.online') }}",
-            type: 'post',
-			data: {
-				_token: "{{ csrf_token() }}",
-            },
-            success: function(data){
-                console.log(data);
-            }
-        });
-    }
+    
     function classData(){
         $('.virtual-class').each(function(){
             var id = $(this).data('id');
