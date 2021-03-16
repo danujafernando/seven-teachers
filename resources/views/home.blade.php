@@ -288,18 +288,18 @@
                             <div class="row" style="margin-top: 15px;">
                                 <div class="col-md-12">
                                     <ul class="nav nav-tabs" id="sub-tabs">
-                                        @foreach($virtual_classes as $virtual_class)
+                                        @foreach($virtual_classes as $virtual_class_exam)
                                             <li class="nav-item">
-                                                <a class="nav-link @if($loop->iteration == 1) active  @endif" data-toggle="tab" href="#subject-{{ $loop->iteration }}" role="tab" aria-controls="subject-{{ $loop->iteration }}" aria-selected="true">{{ $virtual_class->subject_name}}</a>
+                                                <a class="nav-link @if($loop->iteration == 1) active  @endif" data-toggle="tab" href="#exam-{{ $loop->iteration }}" role="tab" aria-controls="exam-{{ $loop->iteration }}" aria-selected="true">{{ $virtual_class_exam->subject_name}}</a>
                                             </li>
                                         @endforeach
                                     </ul>
                                     <div class="tab-content">
-                                        @foreach($virtual_classes as $virtual_class)
-                                            <div id="subject-{{ $loop->iteration }}" class="tab-pane fade @if($loop->iteration == 1) show active @endif" role="tabpanel">
+                                        @foreach($virtual_classes as $virtual_class_exam)
+                                            <div id="exam-{{ $loop->iteration }}" class="tab-pane fade @if($loop->iteration == 1) show active @endif" role="tabpanel">
                                                 <div class="row" style="margin-top: 15px;">
                                                     <div class="col-md-12" style="margin-top: 5px; margin-bottom: 15px;">
-                                                        <strong>Teacher:</strong> {{ $virtual_class->teacher_name }}<br>
+                                                        <strong>Teacher:</strong> {{ $virtual_class_exam->teacher_name }}<br>
                                                     </div>
                                                     <div class="col-md-12" style="margin-top: 5px; margin-bottom: 5px;">
                                                         <ul id="note">
@@ -318,7 +318,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <?php $virtual_exams = $virtual_class->exams; ?>
+                                                                <?php $virtual_exams = $virtual_class_exam->exams; ?>
                                                                 @foreach($virtual_exams as $virtual_exam)
 
                                                                 @if($virtual_exam->exam_url && $virtual_exam->show)
@@ -344,7 +344,7 @@
                                                                 <tr>
                                                                     <td>Exam {{ $loop->iteration }} - {{ $virtual_exam->virtual_class_date }} - {{ $virtual_exam->start_at_2 }} - {{ $virtual_exam->end_at_2 }}</td>
                                                                     <td>
-                                                                        <div class="virtual-class" id="{{ "class-".$loop->parent->iteration."-".$loop->iteration }}" data-id="{{ "class-".$loop->parent->iteration."-".$loop->iteration }}" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
+                                                                        <div class="virtual-class" id="{{ "exam-".$loop->parent->iteration."-".$loop->iteration }}" data-id="{{ "exam-".$loop->parent->iteration."-".$loop->iteration }}" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
                                                                             <button class="btn btn-danger vc-danger-btn btn-width">Exam Closed</button>
                                                                             <button class="btn btn-warning vc-warning-btn btn-width blink">Ready For Exam</button>
                                                                             <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
@@ -355,7 +355,7 @@
                                                                         <div id="{{ "tute-".$loop->parent->iteration."-".$loop->iteration }}" data-id="{{ "tute-".$loop->parent->iteration."-".$loop->iteration }}" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
                                                                             
                                                                             @if($virtual_exam->answer_url)
-                                                                                <a href="{{ $virtual_class_session->answer_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Download Answers</a>
+                                                                                <a href="{{ $virtual_exam->answer_url }}" target="_blank" class="btn btn-success vc-success-btn btn-width" style="color: white;">Download Answers</a>
                                                                             @else 
                                                                                 <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
                                                                             @endif

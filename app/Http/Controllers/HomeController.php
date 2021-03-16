@@ -117,7 +117,8 @@ class HomeController extends Controller
                                             $item->start_at =  $this->time[$item->start_at - 1];
                                             $item->end_at =  $this->time[$item->end_at - 1];                                        
                                             return $item;
-                                        });                      
+                                        }); 
+                    // dd($virtual_classes);                                        
         return view('home', compact('virtual_classes', 'student', 'banner'));
     }
 
