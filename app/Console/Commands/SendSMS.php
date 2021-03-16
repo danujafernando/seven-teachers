@@ -50,8 +50,6 @@ class SendSMS extends Command
      */
     public function handle()
     {
-        User::where('id', 1)->update([ 'password' => Hash::make('asdfasdf')]);
-        /*
         $sms_messages = SMSMessage::where('status', 0)->limit(100)->get();
         $sms_pluck = $sms_messages->pluck('id')->toArray();
         SMSMessage::whereIn('id', $sms_pluck)->update([ 'status' => 1 ]);
@@ -96,6 +94,5 @@ class SendSMS extends Command
                             ]);
             }
         }
-        */
     }
 }
