@@ -224,7 +224,7 @@
                                                                     <tr>
                                                                         <td>Extra Class - {{ $extra_virtual_class_session->virtual_class_date }} <br> {{ $extra_virtual_class_session->extra_class_start_at }} - {{ $extra_virtual_class_session->extra_class_end_at }}</td>
                                                                         <td>
-                                                                            <div class="virtual-class" id="class-extra" data-id="class-extra" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
+                                                                            <div class="virtual-class" id="class-extra-{{ $loop->iteration }}" data-id="class-extra-{{ $loop->iteration }}" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
                                                                                 <button class="btn btn-danger vc-danger-btn btn-width">Session Closed</button>
                                                                                 <button class="btn btn-warning vc-warning-btn btn-width blink">Ready For Class</button>
                                                                                 <button class="btn btn-default vc-default-btn btn-width">Not Available</button>
@@ -261,7 +261,7 @@
                                                                 <tr>
                                                                     <td>{{ $recordings->virtual_class_date }}</td>
                                                                     <td>
-                                                                        <div class="virtual-class" id="recording" data-id="recording" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
+                                                                        <div class="virtual-class" id="recording-{{ $loop->iteration }}" data-id="recording-{{ $loop->iteration }}" data-strat_time="{{ $class_start_time }}" data-end_time="{{ $class_end_time }}">
                                                                             <button class="btn btn-danger vc-danger-btn btn-width-recording"><i class="fa fa-video-camera"></i> Session Closed</button>
                                                                             <button class="btn btn-warning vc-warning-btn btn-width-recording"><i class="fa fa-video-camera blink"></i> Ready For Recording</button>
                                                                             <button class="btn btn-default vc-default-btn btn-width-recording"><i class="fa fa-video-camera"></i> Not Available</button>
