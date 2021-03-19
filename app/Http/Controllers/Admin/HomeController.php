@@ -133,7 +133,7 @@ class HomeController extends Controller
                 ->withInput();
         }
         $user->name = $request->get('name');
-        $user->email = $request->get('email');
+        //$user->email = $request->get('email');
         $user->contact_no = $request->get('contact_no');
         $user->save();
         session()->flash('success_message','User has been updated successfully');
