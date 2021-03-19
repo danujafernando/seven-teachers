@@ -62,10 +62,9 @@ class AdminLoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
-        if ($this->attemptLogin($request)) {
+        if (Auth::guard('admins')->attempt([ $this->username() => $request->get($this->username()), 'password' => $request->get('password'), 'status' => 1 ])) {
             return $this->sendLoginResponse($request);
         }
-
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.

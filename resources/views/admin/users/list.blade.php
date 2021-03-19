@@ -47,7 +47,17 @@
                                             </td>
                                             <td>{{ $ul->created_at }}</td>
                                             <td>
+                                                <a class="btn btn-circle btn-icon-only btn-default" href="{{ route('admin.users.edit.get',[$ul->id]) }}" title="edit">
+                                                    <i class="icon-wrench"></i>
+                                                </a>
                                                 @if($ul->status)
+                                                    <a class="btn btn-circle btn-icon-only btn-warning" href="{{ route('admin.users.password-reset.post',[$ul->id]) }}" title="Password reset"  onclick="event.preventDefault();
+                                                        document.getElementById('user-password-{{ $ul->id }}').submit();">
+                                                            <i class="icon-arrow-right"></i>
+                                                    </a>
+                                                    <form id="user-password-{{ $ul->id }}" action="{{ route('admin.users.password-reset.post',$ul->id) }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                    </form>
                                                     <a class="btn btn-circle btn-icon-only btn-danger" title="Deactivate" href="{{ route('admin.users.deactivate',$ul->id) }}"onclick="event.preventDefault();
                                                      document.getElementById('user-deactivate-{{ $ul->id }}').submit();">
                                                         <i class="fa fa-minus"></i>
@@ -55,6 +65,7 @@
                                                     <form id="user-deactivate-{{ $ul->id }}" action="{{ route('admin.users.deactivate',$ul->id) }}" method="POST" style="display: none;">
                                                         @csrf
                                                     </form>
+                                                    
                                                 @else
                                                     <a class="btn btn-circle btn-icon-only btn-success" title="Activate" href="{{ route('admin.users.activate',$ul->id) }}" onclick="event.preventDefault();
                                                      document.getElementById('user-activate-{{ $ul->id }}').submit();">
@@ -63,6 +74,7 @@
                                                     <form id="user-activate-{{ $ul->id }}" action="{{ route('admin.users.activate',$ul->id) }}" method="POST" style="display: none;">
                                                         @csrf
                                                     </form>
+                                                    
                                                 @endif
                                             </td>
                                         </tr>

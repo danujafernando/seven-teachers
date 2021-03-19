@@ -13,7 +13,7 @@
             <li class="heading">
                 <h3 class="uppercase">User Management</h3>
             </li>
-            <?php  $user_routes_names = array('admin.list','admin.users.add');?>
+            <?php  $user_routes_names = array('admin.list','admin.users.add', 'admin.users.edit');?>
             <li class="nav-item <?php echo (in_array($route_name, $user_routes_names)) ? "start active open" : ""?>">
                 <a href="{{ route('admin.list') }}" class="nav-link nav-toggle">
                     <i class="icon-home"></i>

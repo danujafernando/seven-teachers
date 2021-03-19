@@ -25,8 +25,11 @@ Route::group(['prefix'=>'administrator'], function() {
     Route::get('users','Admin\HomeController@show')->name('admin.list');
     Route::get('user/add','Admin\HomeController@add')->name('admin.users.add');
     Route::post('user/add','Admin\HomeController@store')->name('admin.users.store');
+    Route::get('user/edit/{id}','Admin\HomeController@edit')->name('admin.users.edit.get');
+    Route::post('user/update/{id}','Admin\HomeController@update')->name('admin.users.edit.post');
     Route::post('user/deactivate/{id}','Admin\HomeController@deactivate')->name('admin.users.deactivate');
     Route::post('user/activate/{id}','Admin\HomeController@activate')->name('admin.users.activate');
+    Route::post('user/reset/{id}','Admin\HomeController@passwordReset')->name('admin.users.password-reset.post');
 
     Route::get('students','Admin\StudentController@show')->name('admin.students.list');
     Route::get('student/add','Admin\StudentController@add')->name('admin.students.add');
